@@ -81,5 +81,6 @@ func (s *Server) Increment(ctx context.Context, Amount *gRPC.Amount) (*gRPC.Ack,
 	// increments the value by the amount given in the request,
 	// and returns the new value.
 	s.incrementValue += int64(Amount.GetValue())
+	fmt.Printf("%d += %d\n", s.incrementValue, int64(Amount.GetValue()))
 	return &gRPC.Ack{NewValue: s.incrementValue}, nil
 }

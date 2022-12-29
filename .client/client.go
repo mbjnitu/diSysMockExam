@@ -16,7 +16,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 )
 
-// Same principle as in client. Flags allows for user specific arguments/values
+// Flags allows for user specific arguments/values
 var clientsName = flag.String("name", "default", "Senders name")
 var serverPort = flag.String("server", "5400", "Tcp server")
 
@@ -91,8 +91,7 @@ func parseInput() {
 		if err == nil {
 			incrementVal(val)
 			continue
-		}
-		else {
+		} else {
 			fmt.Print("Increment only acceps a number")
 		}
 	}
@@ -120,4 +119,9 @@ func incrementVal(val int64) {
 		// but hopefully this will never be reached
 		fmt.Println("Oh no something went wrong :(")
 	}
+}
+
+// Function which returns a true boolean if the connection to the server is ready, and false if it's not.
+func conReady(s gRPC.TemplateClient) bool {
+	return ServerConn.GetState().String() == "READY"
 }
